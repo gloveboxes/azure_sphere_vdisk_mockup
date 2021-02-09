@@ -3,6 +3,11 @@ import time
 
 vdiskRequestMqttTopic = "altair/766786/vdisk/request"
 
+response = ""
+
+for i in range(1024 * 4):
+    response = response + "a"
+
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code: %s" % rc)
     client.subscribe(vdiskRequestMqttTopic)
@@ -14,7 +19,7 @@ def on_disconnect(client, userdata, rc):
 
 def on_message(client, userdata, msg):
     print("{0} - {1} ".format(msg.topic, str(msg.payload)))
-    client.publish("altair/766786/vdisk/response", str(msg.payload))
+    client.publish("altair/766786/vdisk/response", response)
 
 client = mqtt.Client('altrair677868678', mqtt.MQTTv311)
 
@@ -23,7 +28,7 @@ client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 
-client.connect("test.mosquitto.org")
+client.connect("mosquitto.australiaeast.cloudapp.azure.com")
 
 client.loop_start()
 

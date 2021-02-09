@@ -22,7 +22,7 @@ static char* sub_topic_vdisk_response = NULL;
 static char* pub_topic_vdisk_request = NULL;
 
 static uint8_t sendbuf[3072]; /* sendbuf should be large enough to hold multiple whole mqtt messages */
-static uint8_t recvbuf[512]; /* recvbuf should be large enough any whole mqtt message expected to be received */
+static uint8_t recvbuf[1024 * 6]; /* recvbuf should be large enough any whole mqtt message expected to be received */
 
 static void reconnect_client(struct mqtt_client* client, void** reconnect_state_vptr);
 static void send_message(char* message);
